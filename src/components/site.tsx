@@ -2,6 +2,7 @@ import { Link } from "@tanstack/react-router";
 import { Instagram, MessageCircle } from "lucide-react";
 import type { ReactNode } from "react";
 import { INSTAGRAM_URL, WHATSAPP_URL } from "@/lib/links";
+import qr from "@/assets/whatsapp_qrcode.jpg.asset.json";
 
 export function WhatsButton({ children = "Falar no WhatsApp", variant = "solid" }: { children?: ReactNode; variant?: "solid" | "light" }) {
   const cls =
@@ -71,6 +72,10 @@ export function Footer() {
         <div className="flex flex-wrap justify-center gap-3">
           <WhatsButton>Quero começar</WhatsButton>
           <InstaButton />
+        </div>
+        <div className="flex flex-col items-center gap-2">
+          <img src={qr.url} alt="QR code do WhatsApp da Teacher Jaque" className="w-36 rounded-2xl bg-card p-2" />
+          <p className="text-sm opacity-80">Ou aponte a câmera do celular</p>
         </div>
         <p className="text-sm opacity-70">© {new Date().getFullYear()} Teacher Jaque Veloso · Aulas de inglês online</p>
       </div>
