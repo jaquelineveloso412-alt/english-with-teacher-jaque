@@ -1,7 +1,26 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { Plane, Briefcase, Coffee, ArrowRight } from "lucide-react";
 import foto from "@/assets/jaque_cafe.jpg.asset.json";
+import retrato from "@/assets/jaque_retrato.jpg.asset.json";
+import aula1 from "@/assets/aula_online_1.jpg.asset.json";
+import aula2 from "@/assets/aula_online_2.jpg.asset.json";
+import aula3 from "@/assets/aula_online_3.jpg.asset.json";
+import dep1 from "@/assets/depoimento_bruna.jpg.asset.json";
+import dep2 from "@/assets/depoimento_bru.png.asset.json";
+import dep3 from "@/assets/depoimento_marina.png.asset.json";
 import { WhatsButton, InstaButton } from "@/components/site";
+import { FotoCarousel, type Slide } from "@/components/carousel-fotos";
+
+const slides: Slide[] = [
+  { src: foto.url, alt: "Teacher Jaque Veloso" },
+  { src: dep3.url, alt: "Depoimento da aluna Marina", fit: "contain" },
+  { src: aula1.url, alt: "Aula online com aluna" },
+  { src: dep2.url, alt: "Depoimento da aluna Bru", fit: "contain" },
+  { src: retrato.url, alt: "Retrato da Teacher Jaque" },
+  { src: aula2.url, alt: "Aula online com jogos" },
+  { src: dep1.url, alt: "Depoimento da aluna Bruna", fit: "contain" },
+  { src: aula3.url, alt: "Aula online de conversação" },
+];
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -33,7 +52,8 @@ function Index() {
           </div>
           <div className="relative mx-auto w-72 md:w-80">
             <div className="absolute -inset-3 rotate-6 rounded-3xl bg-lilac" />
-            <img src={foto.url} alt="Teacher Jaque Veloso" className="relative aspect-[3/4] w-full rounded-3xl object-cover" />
+            <div className="relative"><FotoCarousel slides={slides} /></div>
+            <p className="relative mt-4 text-center text-sm opacity-80">Minhas aulas e o que meus alunos dizem 💜</p>
           </div>
         </div>
       </section>
