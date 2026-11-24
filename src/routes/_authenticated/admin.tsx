@@ -109,7 +109,10 @@ function Admin() {
       updated_at: new Date().toISOString(),
     }).eq("id", "main");
     setSaving("");
-    if (saveError) return toast.error("Não foi possível salvar. Tente novamente.");
+    if (saveError) {
+      toast.error("Não foi possível salvar. Tente novamente.");
+      return;
+    }
     await refresh();
     toast.success("Textos, fotos e turma atualizados no site.");
   }
@@ -121,7 +124,10 @@ function Admin() {
       ? await supabase.from("testimonials").insert(payload)
       : await supabase.from("testimonials").update(payload).eq("id", item.id);
     setSaving("");
-    if (result.error) return toast.error("Não foi possível salvar o depoimento.");
+    if (result.error) {
+      toast.error("Não foi possível salvar o depoimento.");
+      return;
+    }
     await refresh();
     toast.success("Depoimento salvo.");
   }
@@ -130,7 +136,10 @@ function Admin() {
     if (!window.confirm("Remover este depoimento?")) return;
     if (!item.id.startsWith("new-")) {
       const { error: deleteError } = await supabase.from("testimonials").delete().eq("id", item.id);
-      if (deleteError) return toast.error("Não foi possível remover o depoimento.");
+      if (deleteError) {
+        toast.error("Não foi possível remover o depoimento.");
+        return;
+      }
     }
     setTestimonials((current) => current.filter((entry) => entry.id !== item.id));
     await refresh();
@@ -154,7 +163,10 @@ function Admin() {
       ? await supabase.from("ebooks").insert(payload)
       : await supabase.from("ebooks").update(payload).eq("id", item.id);
     setSaving("");
-    if (result.error) return toast.error("Não foi possível salvar o e-book.");
+    if (result.error) {
+      toast.error("Não foi possível salvar o e-book.");
+      return;
+    }
     await refresh();
     toast.success("E-book salvo e atualizado no site.");
   }
@@ -163,7 +175,10 @@ function Admin() {
     if (!window.confirm("Remover este e-book?")) return;
     if (!item.id.startsWith("new-")) {
       const { error: deleteError } = await supabase.from("ebooks").delete().eq("id", item.id);
-      if (deleteError) return toast.error("Não foi possível remover o e-book.");
+      if (deleteError) {
+        toast.error("Não foi possível remover o e-book.");
+        return;
+      }
     }
     setEbooks((current) => current.filter((entry) => entry.id !== item.id));
     await refresh();
