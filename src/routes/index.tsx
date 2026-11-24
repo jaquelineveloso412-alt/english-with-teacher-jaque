@@ -1,91 +1,155 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { Plane, Briefcase, Coffee, ArrowRight } from "lucide-react";
-import foto from "@/assets/jaque_cafe.jpg.asset.json";
-import retrato from "@/assets/jaque_retrato.jpg.asset.json";
-import aula1 from "@/assets/aula_online_1.jpg.asset.json";
-import aula2 from "@/assets/aula_online_2.jpg.asset.json";
-import aula3 from "@/assets/aula_online_3.jpg.asset.json";
-import dep1 from "@/assets/depoimento_bruna.jpg.asset.json";
-import dep2 from "@/assets/depoimento_bru.png.asset.json";
-import dep3 from "@/assets/depoimento_marina.png.asset.json";
+import { useSuspenseQuery } from "@tanstack/react-query";
+import { ArrowRight, BookOpen, Briefcase, Coffee, Play, Plane, Users } from "lucide-react";
 import { WhatsButton, InstaButton } from "@/components/site";
-import { FotoCarousel, type Slide } from "@/components/carousel-fotos";
-
-const slides: Slide[] = [
-  { src: foto.url, alt: "Teacher Jaque Veloso" },
-  { src: dep3.url, alt: "Depoimento da aluna Marina", fit: "contain" },
-  { src: aula1.url, alt: "Aula online com aluna" },
-  { src: dep2.url, alt: "Depoimento da aluna Bru", fit: "contain" },
-  { src: retrato.url, alt: "Retrato da Teacher Jaque" },
-  { src: aula2.url, alt: "Aula online com jogos" },
-  { src: dep1.url, alt: "Depoimento da aluna Bruna", fit: "contain" },
-  { src: aula3.url, alt: "Aula online de conversação" },
-];
+import { DepoimentoCarousel } from "@/components/carousel-fotos";
+import { EbookCard } from "@/components/products";
+import { GroupPlanCard } from "@/components/offer";
+import { contentQueryOptions } from "@/lib/content";
 
 export const Route = createFileRoute("/")({
-  head: () => ({
-    meta: [
-      { title: "Teacher Jaque Veloso — Destrave seu inglês para a vida real" },
-      { name: "description", content: "Aulas de inglês online, particulares ou em grupo, com foco em conversação para viagens, trabalho e dia a dia." },
-      { property: "og:title", content: "Teacher Jaque Veloso — Inglês para a vida real" },
-      { property: "og:description", content: "Aulas de inglês online com foco em comunicação e confiança." },
-    ],
-  }),
+  loader: ({ context }) => context.queryClient.ensureQueryData(contentQueryOptions),
+  head: ({ loaderData }) => {
+    const image = loaderData?.settings.home_photo_url;
+    const socialImage = image?.startsWith("https://")
+      ? [
+          { property: "og:image", content: image },
+          { name: "twitter:image", content: image },
+        ]
+      : [];
+    return {
+      meta: [
+        { title: "Teacher Jaque Veloso — Inglês em grupo para a vida real" },
+        { name: "description", content: "Turmas online com até 6 alunos, aulas ao vivo e gravadas, plataforma de apoio e material incluso." },
+        { property: "og:title", content: "Destrave seu inglês com a Teacher Jaque" },
+        { property: "og:description", content: "Prática toda semana, turma reduzida e suporte para você falar com confiança." },
+        ...socialImage,
+      ],
+    };
+  },
   component: Index,
 });
 
 function Index() {
+  const { data } = useSuspenseQuery(contentQueryOptions);
+  const { settings, testimonials, ebooks } = data;
+
   return (
     <>
-      <section className="bg-hero text-primary-foreground">
-        <div className="mx-auto grid max-w-6xl items-center gap-10 px-5 py-16 md:grid-cols-2 md:py-24">
+      <section className="overflow-hidden bg-hero text-primary-foreground">
+        <div className="mx-auto grid max-w-6xl items-center gap-12 px-5 py-14 md:grid-cols-[1.08fr_0.92fr] md:py-20">
           <div>
-            <span className="inline-block rounded-full bg-lilac px-4 py-1 text-sm font-semibold text-accent-foreground">English Teacher ✦ online</span>
-            <h1 className="mt-5 text-5xl font-extrabold leading-[1.05] md:text-6xl">
-              Destrave seu inglês <span className="text-lilac">para a vida real.</span>
+            <span className="inline-flex items-center gap-2 rounded-full bg-lilac px-4 py-2 text-sm font-bold text-accent-foreground">
+              <Users className="h-4 w-4" /> {settings.hero_eyebrow}
+            </span>
+            <h1 className="mt-6 max-w-xl text-5xl font-extrabold leading-[1.02] md:text-6xl">
+              {settings.hero_title} <span className="text-lilac">{settings.hero_highlight}</span>
             </h1>
-            <p className="mt-5 max-w-md text-lg opacity-85">Aulas com foco em comunicação, confiança e situações reais — do primeiro nível em diante.</p>
+            <p className="mt-6 max-w-lg text-lg leading-relaxed opacity-85">{settings.hero_description}</p>
             <div className="mt-8 flex flex-wrap gap-3">
-              <WhatsButton>Quero minha aula</WhatsButton>
-              <InstaButton />
+              <WhatsButton href={settings.whatsapp_url}>Quero entrar para a turma</WhatsButton>
+              <a href="#plano" className="inline-flex items-center gap-2 rounded-full border-2 border-current px-6 py-3 font-semibold">
+                Conhecer a turma <ArrowRight className="h-5 w-5" />
+              </a>
+            </div>
+            <div className="mt-8 flex flex-wrap gap-x-5 gap-y-2 text-sm font-medium opacity-85">
+              <span>✓ Ao vivo + gravadas</span>
+              <span>✓ Material incluso</span>
+              <span>✓ Até 6 alunos</span>
             </div>
           </div>
-          <div className="relative mx-auto w-72 md:w-80">
-            <div className="absolute -inset-3 rotate-6 rounded-3xl bg-lilac" />
-            <div className="relative"><FotoCarousel slides={slides} /></div>
-            <p className="relative mt-4 text-center text-sm opacity-80">Minhas aulas e o que meus alunos dizem 💜</p>
+          <div className="relative mx-auto w-full max-w-md">
+            <div className="absolute -inset-3 rotate-2 rounded-[2rem] bg-lilac" aria-hidden="true" />
+            <img
+              src={settings.home_photo_url}
+              alt="Teacher Jaque Veloso"
+              className="relative aspect-[4/5] w-full rounded-[2rem] object-cover object-center shadow-2xl"
+            />
+            <div className="relative mx-auto -mt-6 w-[88%] rounded-2xl bg-card p-4 text-center text-primary shadow-xl">
+              <p className="font-display text-lg font-bold">Você não precisa aprender sozinho(a).</p>
+              <p className="mt-1 text-sm text-muted-foreground">Vamos praticar juntos, toda semana.</p>
+            </div>
           </div>
         </div>
       </section>
 
-      <section className="mx-auto max-w-6xl px-5 py-16">
-        <h2 className="text-3xl font-bold md:text-4xl">Inglês pra usar de verdade</h2>
-        <div className="mt-8 grid gap-5 md:grid-cols-3">
+      <section className="mx-auto max-w-6xl px-5 py-16 md:py-20">
+        <div className="max-w-2xl">
+          <p className="text-sm font-bold uppercase tracking-[0.18em] text-accent">Inglês para usar de verdade</p>
+          <h2 className="mt-3 text-3xl font-bold md:text-4xl">Aprenda o que você vai colocar em prática fora da aula.</h2>
+        </div>
+        <div className="mt-9 grid gap-5 md:grid-cols-3">
           {[
-            { i: Coffee, t: "Dia a dia", d: "Converse sem travar em situações do cotidiano." },
-            { i: Plane, t: "Viagens", d: "Aeroporto, hotel, restaurante: viaje com confiança." },
-            { i: Briefcase, t: "Trabalho", d: "Reuniões, e-mails e entrevistas em inglês." },
-          ].map(({ i: Icon, t, d }) => (
-            <div key={t} className="rounded-2xl border-2 border-primary bg-card p-6 shadow-pop">
+            { icon: Coffee, title: "Dia a dia", text: "Converse sem travar em situações do cotidiano." },
+            { icon: Plane, title: "Viagens", text: "Aeroporto, hotel e restaurante com mais confiança." },
+            { icon: Briefcase, title: "Trabalho", text: "Reuniões, e-mails e entrevistas em inglês." },
+          ].map(({ icon: Icon, title, text }) => (
+            <article key={title} className="rounded-3xl border-2 border-primary bg-card p-6 shadow-pop">
               <Icon className="h-8 w-8 text-accent" />
-              <h3 className="mt-4 text-xl font-bold">{t}</h3>
-              <p className="mt-2 text-muted-foreground">{d}</p>
-            </div>
+              <h3 className="mt-4 text-xl font-bold">{title}</h3>
+              <p className="mt-2 text-muted-foreground">{text}</p>
+            </article>
           ))}
         </div>
       </section>
 
-      <section className="mx-auto grid max-w-6xl gap-5 px-5 pb-20 md:grid-cols-2">
-        <Link to="/planos" className="group rounded-3xl bg-primary p-8 text-primary-foreground">
-          <p className="text-sm opacity-70">A partir de R$ 280,00/mês</p>
-          <h3 className="mt-2 text-3xl font-bold">Conheça os planos</h3>
-          <ArrowRight className="mt-6 h-6 w-6 transition group-hover:translate-x-2" />
-        </Link>
-        <Link to="/ebooks" className="group rounded-3xl bg-lilac-soft p-8 text-primary">
-          <p className="text-sm text-muted-foreground">E-book grátis disponível</p>
-          <h3 className="mt-2 text-3xl font-bold">Inglês para Viajar Sem Travar</h3>
-          <ArrowRight className="mt-6 h-6 w-6 transition group-hover:translate-x-2" />
-        </Link>
+      <section id="plano" className="bg-lilac-soft px-5 py-16 md:py-20">
+        <div className="mx-auto max-w-5xl">
+          <div className="mb-8 text-center">
+            <p className="text-sm font-bold uppercase tracking-[0.18em] text-accent">Sua rotina de inglês, com acompanhamento</p>
+            <h2 className="mt-3 text-3xl font-bold text-primary md:text-4xl">Uma turma pequena para você participar de verdade.</h2>
+          </div>
+          <GroupPlanCard settings={settings} />
+          <p className="mt-5 text-center text-sm text-muted-foreground">Ficou com dúvida? Chame a Teacher no WhatsApp antes de decidir.</p>
+        </div>
+      </section>
+
+      <section className="mx-auto max-w-6xl px-5 py-16 md:py-20">
+        <div className="flex flex-wrap items-end justify-between gap-4">
+          <div className="max-w-2xl">
+            <p className="text-sm font-bold uppercase tracking-[0.18em] text-accent">Quem aprende com a Jaque</p>
+            <h2 className="mt-3 text-3xl font-bold md:text-4xl">Resultados contados por quem já está nas aulas.</h2>
+          </div>
+          <WhatsButton href={settings.whatsapp_url}>Também quero evoluir</WhatsButton>
+        </div>
+        <div className="mt-9">
+          <DepoimentoCarousel testimonials={testimonials} />
+        </div>
+      </section>
+
+      {ebooks.length > 0 && (
+        <section id="ebooks" className="bg-primary px-5 py-16 text-primary-foreground md:py-20">
+          <div className="mx-auto max-w-6xl">
+            <div className="grid gap-8 lg:grid-cols-[0.75fr_1.25fr] lg:items-start">
+              <div>
+                <BookOpen className="h-9 w-9 text-lilac" />
+                <p className="mt-5 text-sm font-bold uppercase tracking-[0.18em] text-lilac">Para estudar no seu ritmo</p>
+                <h2 className="mt-3 text-3xl font-bold md:text-4xl">Continue evoluindo com os e-books da Teacher.</h2>
+                <p className="mt-4 opacity-80">Conteúdo prático para revisar quando quiser — no celular, no computador ou para imprimir.</p>
+                <Link to="/ebooks" className="mt-6 inline-flex items-center gap-2 font-bold text-lilac underline">
+                  Ver todos os e-books <ArrowRight className="h-5 w-5" />
+                </Link>
+              </div>
+              <div className="grid gap-5">
+                {ebooks.slice(0, 2).map((ebook) => (
+                  <EbookCard key={ebook.id} ebook={ebook} whatsappUrl={settings.whatsapp_url} compact />
+                ))}
+              </div>
+            </div>
+          </div>
+        </section>
+      )}
+
+      <section className="mx-auto max-w-6xl px-5 py-16 md:py-20">
+        <div className="rounded-3xl border-2 border-primary bg-lilac-soft p-8 text-center shadow-pop md:p-12">
+          <Play className="mx-auto h-9 w-9 text-accent" />
+          <h2 className="mt-4 text-3xl font-bold text-primary md:text-4xl">Pronto(a) para fazer o inglês caber na sua vida?</h2>
+          <p className="mx-auto mt-4 max-w-2xl text-muted-foreground">Converse com a Teacher, conte seu objetivo e descubra como a turma pode ajudar você.</p>
+          <div className="mt-7 flex flex-wrap justify-center gap-3">
+            <WhatsButton href={settings.whatsapp_url}>Quero conversar sobre a turma</WhatsButton>
+            <InstaButton className="text-primary" />
+          </div>
+        </div>
       </section>
     </>
   );

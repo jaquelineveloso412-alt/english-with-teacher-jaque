@@ -1,42 +1,35 @@
-import { createFileRoute } from "@tanstack/react-router";
-import { Check } from "lucide-react";
-import { plans } from "@/lib/plans";
-import { WHATSAPP_URL } from "@/lib/links";
+import { createFileRoute, Link } from "@tanstack/react-router";
+import { useSuspenseQuery } from "@tanstack/react-query";
+import { GroupPlanCard } from "@/components/offer";
+import { contentQueryOptions } from "@/lib/content";
 
 export const Route = createFileRoute("/planos")({
+  loader: ({ context }) => context.queryClient.ensureQueryData(contentQueryOptions),
   head: () => ({
     meta: [
-      { title: "Planos — Aulas de inglês com Jaque Veloso" },
-      { name: "description", content: "Aula particular R$ 499,99/mês ou aula em grupo R$ 280,00/mês. Escolha seu plano." },
-      { property: "og:title", content: "Planos de aulas de inglês — Jaque Veloso" },
-      { property: "og:description", content: "Particular com WhatsApp ou em grupo com aula ao vivo + gravada." },
+      { title: "Turma de inglês online — Teacher Jaque Veloso" },
+      { name: "description", content: "Aulas em grupo por R$ 280,00/mês: ao vivo, gravadas, plataforma de apoio, material e até 6 alunos." },
+      { property: "og:title", content: "Turma de inglês com até 6 alunos" },
+      { property: "og:description", content: "Pratique toda semana e tenha suporte para destravar seu inglês." },
     ],
   }),
   component: Planos,
 });
 
 function Planos() {
+  const { data } = useSuspenseQuery(contentQueryOptions);
   return (
     <div className="mx-auto max-w-5xl px-5 py-16">
-      <h1 className="text-center text-4xl font-extrabold md:text-5xl">Escolha seu plano</h1>
-      <p className="mt-3 text-center text-muted-foreground">Mensalidade fixa, sem surpresa. Comece quando quiser.</p>
-      <div className="mt-12 grid gap-8 md:grid-cols-2">
-        {plans.map((p) => (
-          <div key={p.name} className={`flex flex-col rounded-3xl border-2 border-primary p-8 shadow-pop ${p.highlight ? "bg-primary text-primary-foreground" : "bg-card"}`}>
-            <span className={`w-fit rounded-full px-3 py-1 text-xs font-bold ${p.highlight ? "bg-lilac text-accent-foreground" : "bg-lilac-soft text-primary"}`}>{p.tag}</span>
-            <h2 className="mt-4 text-2xl font-bold">{p.name}</h2>
-            <p className="mt-2"><span className="font-display text-5xl font-extrabold">{p.price}</span><span className="opacity-70"> /mês</span></p>
-            <ul className="mt-6 flex-1 space-y-3">
-              {p.features.map((f) => (
-                <li key={f} className="flex gap-2"><Check className="h-5 w-5 shrink-0 text-accent" />{f}</li>
-              ))}
-            </ul>
-            <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer"
-              className="mt-8 rounded-full bg-whatsapp py-3 text-center font-semibold text-primary-foreground transition hover:-translate-y-0.5">
-              Quero esse plano
-            </a>
-          </div>
-        ))}
+      <div className="mx-auto max-w-2xl text-center">
+        <p className="text-sm font-bold uppercase tracking-[0.18em] text-accent">Sua vaga na próxima turma</p>
+        <h1 className="mt-3 text-4xl font-extrabold md:text-5xl">Aprenda junto, pratique sempre.</h1>
+        <p className="mt-4 text-muted-foreground">Um único plano, com tudo que você precisa para criar uma rotina de inglês e evoluir com confiança.</p>
+      </div>
+      <div className="mt-12"><GroupPlanCard settings={data.settings} centered /></div>
+      <div className="mt-12 rounded-3xl bg-lilac-soft p-7 text-center">
+        <h2 className="text-2xl font-bold text-primary">Prefere estudar no seu ritmo?</h2>
+        <p className="mt-2 text-muted-foreground">Conheça também os materiais digitais da Teacher.</p>
+        <Link to="/ebooks" className="mt-5 inline-flex rounded-full bg-primary px-6 py-3 font-semibold text-primary-foreground">Ver e-books</Link>
       </div>
       <p className="mt-10 text-center text-sm text-muted-foreground">Pagamento via PIX mensal ou cartão de crédito/débito (sujeito às taxas da operadora).</p>
     </div>

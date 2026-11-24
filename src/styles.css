@@ -30,6 +30,10 @@
   --color-lilac: var(--lilac);
   --color-lilac-soft: var(--lilac-soft);
   --color-whatsapp: var(--whatsapp);
+  --color-google: var(--google);
+  --color-google-muted: var(--google-muted);
+  --color-google-foreground: var(--google-foreground);
+  --color-google-border: var(--google-border);
   --color-destructive: var(--destructive);
   --color-border: var(--border);
   --color-input: var(--input);

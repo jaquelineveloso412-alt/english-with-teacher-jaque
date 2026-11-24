@@ -10,13 +10,21 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
 import { Route as EbooksRouteImport } from './routes/ebooks'
+import { Route as EntrarRouteImport } from './routes/entrar'
 import { Route as PlanosRouteImport } from './routes/planos'
+import { Route as ResetPasswordRouteImport } from './routes/reset-password'
 import { Route as SobreRouteImport } from './routes/sobre'
+import { Route as AuthenticatedAdminRouteImport } from './routes/_authenticated/admin'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AuthenticatedRouteRoute = AuthenticatedRouteRouteImport.update({
+  id: '/_authenticated',
   getParentRoute: () => rootRouteImport,
 } as any)
 const EbooksRoute = EbooksRouteImport.update({
@@ -24,9 +32,19 @@ const EbooksRoute = EbooksRouteImport.update({
   path: '/ebooks',
   getParentRoute: () => rootRouteImport,
 } as any)
+const EntrarRoute = EntrarRouteImport.update({
+  id: '/entrar',
+  path: '/entrar',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const PlanosRoute = PlanosRouteImport.update({
   id: '/planos',
   path: '/planos',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ResetPasswordRoute = ResetPasswordRouteImport.update({
+  id: '/reset-password',
+  path: '/reset-password',
   getParentRoute: () => rootRouteImport,
 } as any)
 const SobreRoute = SobreRouteImport.update({
@@ -34,38 +52,79 @@ const SobreRoute = SobreRouteImport.update({
   path: '/sobre',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AuthenticatedAdminRoute = AuthenticatedAdminRouteImport.update({
+  id: '/admin',
+  path: '/admin',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/ebooks': typeof EbooksRoute
+  '/entrar': typeof EntrarRoute
   '/planos': typeof PlanosRoute
+  '/reset-password': typeof ResetPasswordRoute
   '/sobre': typeof SobreRoute
+  '/admin': typeof AuthenticatedAdminRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/ebooks': typeof EbooksRoute
+  '/entrar': typeof EntrarRoute
   '/planos': typeof PlanosRoute
+  '/reset-password': typeof ResetPasswordRoute
   '/sobre': typeof SobreRoute
+  '/admin': typeof AuthenticatedAdminRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/_authenticated': typeof AuthenticatedRouteRouteWithChildren
   '/ebooks': typeof EbooksRoute
+  '/entrar': typeof EntrarRoute
   '/planos': typeof PlanosRoute
+  '/reset-password': typeof ResetPasswordRoute
   '/sobre': typeof SobreRoute
+  '/_authenticated/admin': typeof AuthenticatedAdminRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/ebooks' | '/planos' | '/sobre'
+  fullPaths:
+    | '/'
+    | '/ebooks'
+    | '/entrar'
+    | '/planos'
+    | '/reset-password'
+    | '/sobre'
+    | '/admin'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/ebooks' | '/planos' | '/sobre'
-  id: '__root__' | '/' | '/ebooks' | '/planos' | '/sobre'
+  to:
+    | '/'
+    | '/ebooks'
+    | '/entrar'
+    | '/planos'
+    | '/reset-password'
+    | '/sobre'
+    | '/admin'
+  id:
+    | '__root__'
+    | '/'
+    | '/_authenticated'
+    | '/ebooks'
+    | '/entrar'
+    | '/planos'
+    | '/reset-password'
+    | '/sobre'
+    | '/_authenticated/admin'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AuthenticatedRouteRoute: typeof AuthenticatedRouteRouteWithChildren
   EbooksRoute: typeof EbooksRoute
+  EntrarRoute: typeof EntrarRoute
   PlanosRoute: typeof PlanosRoute
+  ResetPasswordRoute: typeof ResetPasswordRoute
   SobreRoute: typeof SobreRoute
 }
 
@@ -78,11 +137,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/_authenticated': {
+      id: '/_authenticated'
+      path: ''
+      fullPath: '/'
+      preLoaderRoute: typeof AuthenticatedRouteRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/ebooks': {
       id: '/ebooks'
       path: '/ebooks'
       fullPath: '/ebooks'
       preLoaderRoute: typeof EbooksRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/entrar': {
+      id: '/entrar'
+      path: '/entrar'
+      fullPath: '/entrar'
+      preLoaderRoute: typeof EntrarRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/planos': {
@@ -92,6 +165,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof PlanosRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/reset-password': {
+      id: '/reset-password'
+      path: '/reset-password'
+      fullPath: '/reset-password'
+      preLoaderRoute: typeof ResetPasswordRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/sobre': {
       id: '/sobre'
       path: '/sobre'
@@ -99,13 +179,34 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof SobreRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/_authenticated/admin': {
+      id: '/_authenticated/admin'
+      path: '/admin'
+      fullPath: '/admin'
+      preLoaderRoute: typeof AuthenticatedAdminRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
   }
 }
 
+interface AuthenticatedRouteRouteChildren {
+  AuthenticatedAdminRoute: typeof AuthenticatedAdminRoute
+}
+
+const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
+  AuthenticatedAdminRoute: AuthenticatedAdminRoute,
+}
+
+const AuthenticatedRouteRouteWithChildren =
+  AuthenticatedRouteRoute._addFileChildren(AuthenticatedRouteRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AuthenticatedRouteRoute: AuthenticatedRouteRouteWithChildren,
   EbooksRoute: EbooksRoute,
+  EntrarRoute: EntrarRoute,
   PlanosRoute: PlanosRoute,
+  ResetPasswordRoute: ResetPasswordRoute,
   SobreRoute: SobreRoute,
 }
 export const routeTree = rootRouteImport

@@ -1,36 +1,62 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
+import useEmblaCarousel from "embla-carousel-react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
+import type { Testimonial } from "@/lib/content";
 
-export type Slide = { src: string; alt: string; fit?: "cover" | "contain" };
-
-export function FotoCarousel({ slides, interval = 3500 }: { slides: Slide[]; interval?: number }) {
-  const [i, setI] = useState(0);
+export function DepoimentoCarousel({ testimonials }: { testimonials: Testimonial[] }) {
+  const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true, align: "start" });
   const [paused, setPaused] = useState(false);
-  const n = slides.length;
+
+  const next = useCallback(() => emblaApi?.scrollNext(), [emblaApi]);
+  const previous = useCallback(() => emblaApi?.scrollPrev(), [emblaApi]);
+
   useEffect(() => {
-    if (paused) return;
-    const t = setInterval(() => setI((v) => (v + 1) % n), interval);
-    return () => clearInterval(t);
-  }, [paused, n, interval]);
-  const go = (d: number) => setI((v) => (v + d + n) % n);
+    if (!emblaApi || paused || testimonials.length < 2) return;
+    const timer = window.setInterval(() => emblaApi.scrollNext(), 4000);
+    return () => window.clearInterval(timer);
+  }, [emblaApi, paused, testimonials.length]);
+
+  if (testimonials.length === 0) return null;
 
   return (
-    <div className="relative" onMouseEnter={() => setPaused(true)} onMouseLeave={() => setPaused(false)}>
-      <div className="relative aspect-[3/4] w-full overflow-hidden rounded-3xl bg-card">
-        {slides.map((s, k) => (
-          <img key={s.src} src={s.src} alt={s.alt} loading={k === 0 ? "eager" : "lazy"}
-            className={`absolute inset-0 h-full w-full transition-opacity duration-700 ${s.fit === "contain" ? "object-contain" : "object-cover"} ${k === i ? "opacity-100" : "opacity-0"}`} />
-        ))}
+    <div onMouseEnter={() => setPaused(true)} onMouseLeave={() => setPaused(false)}>
+      <div className="overflow-hidden" ref={emblaRef} aria-label="Depoimentos de alunos">
+        <div className="flex touch-pan-y">
+          {testimonials.map((testimonial) => (
+            <figure
+              key={testimonial.id}
+              className="min-w-0 flex-[0_0_86%] pr-4 sm:flex-[0_0_48%] lg:flex-[0_0_31.5%]"
+            >
+              <div className="flex aspect-[9/13] items-center justify-center overflow-hidden rounded-3xl border bg-card p-2 shadow-pop">
+                <img
+                  src={testimonial.image_url}
+                  alt={testimonial.alt_text}
+                  loading="lazy"
+                  className="h-full w-full rounded-2xl object-contain"
+                />
+              </div>
+            </figure>
+          ))}
+        </div>
       </div>
-      <button aria-label="Anterior" onClick={() => go(-1)}
-        className="absolute left-2 top-1/2 -translate-y-1/2 rounded-full bg-background/80 p-2 text-primary"><ChevronLeft className="h-5 w-5" /></button>
-      <button aria-label="Próxima" onClick={() => go(1)}
-        className="absolute right-2 top-1/2 -translate-y-1/2 rounded-full bg-background/80 p-2 text-primary"><ChevronRight className="h-5 w-5" /></button>
-      <div className="absolute bottom-3 left-0 right-0 flex justify-center gap-1.5">
-        {slides.map((_, k) => (
-          <button key={k} aria-label={`Foto ${k + 1}`} onClick={() => setI(k)}
-            className={`h-2 rounded-full transition-all ${k === i ? "w-6 bg-accent" : "w-2 bg-background/70"}`} />
-        ))}
+      <div className="mt-6 flex items-center justify-center gap-3">
+        <button
+          type="button"
+          onClick={previous}
+          aria-label="Depoimento anterior"
+          className="rounded-full border bg-card p-3 text-primary transition hover:bg-lilac-soft"
+        >
+          <ChevronLeft className="h-5 w-5" />
+        </button>
+        <span className="text-sm font-medium text-muted-foreground">Arraste para ver mais</span>
+        <button
+          type="button"
+          onClick={next}
+          aria-label="Próximo depoimento"
+          className="rounded-full border bg-card p-3 text-primary transition hover:bg-lilac-soft"
+        >
+          <ChevronRight className="h-5 w-5" />
+        </button>
       </div>
     </div>
   );
