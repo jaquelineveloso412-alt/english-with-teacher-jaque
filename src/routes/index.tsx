@@ -6,6 +6,7 @@ import { DepoimentoCarousel } from "@/components/carousel-fotos";
 import { EbookCard } from "@/components/products";
 import { GroupPlanCard } from "@/components/offer";
 import { contentQueryOptions } from "@/lib/content";
+import { PromoTimer } from "@/components/promo-timer";
 
 export const Route = createFileRoute("/")({
   loader: ({ context }) => context.queryClient.ensureQueryData(contentQueryOptions),
@@ -36,38 +37,54 @@ function Index() {
 
   return (
     <>
-      <section className="overflow-hidden bg-hero text-primary-foreground">
-        <div className="mx-auto grid max-w-6xl items-center gap-12 px-5 py-14 md:grid-cols-[1.08fr_0.92fr] md:py-20">
-          <div>
-            <span className="inline-flex items-center gap-2 rounded-full bg-lilac px-4 py-2 text-sm font-bold text-accent-foreground">
+      <section className="relative isolate min-h-[640px] overflow-hidden bg-primary text-primary-foreground md:min-h-[720px]">
+        <img
+          src={settings.home_photo_url}
+          alt="Teacher Jaque Veloso"
+          className="absolute inset-0 -z-20 h-full w-full object-cover object-[70%_center] md:object-right"
+        />
+        <div className="absolute inset-0 -z-10 bg-gradient-to-t from-primary via-primary/70 to-primary/10 md:bg-gradient-to-r md:from-primary md:via-primary/75 md:to-transparent" aria-hidden="true" />
+
+        <div className="mx-auto max-w-6xl px-4 pt-4">
+          <div className="flex flex-wrap items-center justify-between gap-3 rounded-3xl border border-primary-foreground/20 bg-card/90 px-4 py-3 text-foreground shadow-xl backdrop-blur md:px-6">
+            <div className="flex items-center gap-3">
+              <span className="hidden rounded-full bg-lilac-soft px-4 py-2 text-sm font-semibold text-primary sm:inline">Oferta especial</span>
+              <div>
+                <p className="text-sm font-bold uppercase tracking-wide">Somente hoje</p>
+                <p className="text-sm text-muted-foreground">{settings.plan_name} por <strong className="text-accent">{settings.plan_price}</strong>/mês</p>
+              </div>
+            </div>
+            <div className="flex items-center gap-4">
+              <div className="text-right">
+                <p className="text-xs uppercase tracking-[0.2em] text-muted-foreground">Encerra em</p>
+                <PromoTimer />
+              </div>
+              <a href={settings.whatsapp_url} target="_blank" rel="noopener noreferrer" className="rounded-full bg-primary px-5 py-3 text-sm font-bold uppercase text-primary-foreground transition hover:-translate-y-0.5">
+                Garantir agora
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <div className="mx-auto flex max-w-6xl flex-col justify-end px-5 pb-14 pt-56 md:justify-center md:pb-24 md:pt-24">
+          <div className="max-w-xl">
+            <span className="inline-flex items-center gap-2 rounded-full bg-primary-foreground/15 px-4 py-2 text-sm font-bold backdrop-blur">
               <Users className="h-4 w-4" /> {settings.hero_eyebrow}
             </span>
-            <h1 className="mt-6 max-w-xl text-5xl font-extrabold leading-[1.02] md:text-6xl">
-              {settings.hero_title} <span className="text-lilac">{settings.hero_highlight}</span>
+            <h1 className="mt-6 text-5xl font-extrabold leading-[1.02] md:text-6xl">
+              {settings.hero_title} <em className="text-lilac">{settings.hero_highlight}</em>
             </h1>
-            <p className="mt-6 max-w-lg text-lg leading-relaxed opacity-85">{settings.hero_description}</p>
+            <p className="mt-6 max-w-lg text-lg leading-relaxed opacity-90">{settings.hero_description}</p>
             <div className="mt-8 flex flex-wrap gap-3">
               <WhatsButton href={settings.whatsapp_url}>Quero entrar para a turma</WhatsButton>
               <a href="#plano" className="inline-flex items-center gap-2 rounded-full border-2 border-current px-6 py-3 font-semibold">
                 Conhecer a turma <ArrowRight className="h-5 w-5" />
               </a>
             </div>
-            <div className="mt-8 flex flex-wrap gap-x-5 gap-y-2 text-sm font-medium opacity-85">
+            <div className="mt-8 flex flex-wrap gap-x-5 gap-y-2 text-sm font-medium opacity-90">
               <span>✓ Ao vivo + gravadas</span>
               <span>✓ Material incluso</span>
               <span>✓ Até 6 alunos</span>
-            </div>
-          </div>
-          <div className="relative mx-auto w-full max-w-md">
-            <div className="absolute -inset-3 rotate-2 rounded-[2rem] bg-lilac" aria-hidden="true" />
-            <img
-              src={settings.home_photo_url}
-              alt="Teacher Jaque Veloso"
-              className="relative aspect-[4/5] w-full rounded-[2rem] object-cover object-center shadow-2xl"
-            />
-            <div className="relative mx-auto -mt-6 w-[88%] rounded-2xl bg-card p-4 text-center text-primary shadow-xl">
-              <p className="font-display text-lg font-bold">Você não precisa aprender sozinho(a).</p>
-              <p className="mt-1 text-sm text-muted-foreground">Vamos praticar juntos, toda semana.</p>
             </div>
           </div>
         </div>
