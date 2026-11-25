@@ -9,6 +9,7 @@ export function GroupPlanCard({ settings, centered = false }: { settings: SiteSe
           <span className="inline-block rounded-full bg-lilac px-4 py-1 text-xs font-bold text-accent-foreground">{settings.plan_tag}</span>
           <h3 className="mt-4 text-3xl font-bold">{settings.plan_name}</h3>
           <p className="mt-5">
+            <span className="block text-xs font-bold uppercase tracking-[0.18em] opacity-75">Aulas por até</span>
             <span className="font-display text-5xl font-extrabold">{settings.plan_price}</span>
             <span className="opacity-75"> /mês</span>
           </p>
@@ -29,7 +30,7 @@ export function GroupPlanCard({ settings, centered = false }: { settings: SiteSe
         rel="noopener noreferrer"
         className="mt-8 flex items-center justify-center rounded-full bg-whatsapp px-6 py-4 text-center font-bold text-primary-foreground transition hover:-translate-y-0.5"
       >
-        Quero minha vaga na turma
+        Quero começar as aulas
       </a>
     </article>
   );

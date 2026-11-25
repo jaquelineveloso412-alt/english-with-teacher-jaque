@@ -20,10 +20,10 @@ export const Route = createFileRoute("/")({
       : [];
     return {
       meta: [
-        { title: "Teacher Jaque Veloso — Inglês em grupo para a vida real" },
-        { name: "description", content: "Turmas online com até 6 alunos, aulas ao vivo e gravadas, plataforma de apoio e material incluso." },
+        { title: "Teacher Jaque Veloso — Aulas de inglês para a vida real" },
+        { name: "description", content: "Aulas ao vivo toda semana, aulas gravadas, plataforma de apoio e material incluso por até R$ 280,00/mês." },
         { property: "og:title", content: "Destrave seu inglês com a Teacher Jaque" },
-        { property: "og:description", content: "Prática toda semana, turma reduzida e suporte para você falar com confiança." },
+        { property: "og:description", content: "Prática toda semana e suporte para você falar com confiança." },
         ...socialImage,
       ],
     };
@@ -51,7 +51,7 @@ function Index() {
               <span className="hidden rounded-full bg-lilac-soft px-4 py-2 text-sm font-semibold text-primary sm:inline">Oferta especial</span>
               <div>
                 <p className="text-sm font-bold uppercase tracking-wide">Somente hoje</p>
-                <p className="text-sm text-muted-foreground">{settings.plan_name} por <strong className="text-accent">{settings.plan_price}</strong>/mês</p>
+                <p className="text-sm text-muted-foreground">Aulas por até <strong className="text-accent">{settings.plan_price}</strong>/mês</p>
               </div>
             </div>
             <div className="flex items-center gap-4">
@@ -76,15 +76,15 @@ function Index() {
             </h1>
             <p className="mt-6 max-w-lg text-lg leading-relaxed opacity-90">{settings.hero_description}</p>
             <div className="mt-8 flex flex-wrap gap-3">
-              <WhatsButton href={settings.whatsapp_url}>Quero entrar para a turma</WhatsButton>
+              <WhatsButton href={settings.whatsapp_url}>Quero começar as aulas</WhatsButton>
               <a href="#plano" className="inline-flex items-center gap-2 rounded-full border-2 border-current px-6 py-3 font-semibold">
-                Conhecer a turma <ArrowRight className="h-5 w-5" />
+                Conhecer as aulas <ArrowRight className="h-5 w-5" />
               </a>
             </div>
             <div className="mt-8 flex flex-wrap gap-x-5 gap-y-2 text-sm font-medium opacity-90">
               <span>✓ Ao vivo + gravadas</span>
               <span>✓ Material incluso</span>
-              <span>✓ Até 6 alunos</span>
+              <span>✓ Plataforma de apoio</span>
             </div>
           </div>
         </div>
@@ -114,7 +114,7 @@ function Index() {
         <div className="mx-auto max-w-5xl">
           <div className="mb-8 text-center">
             <p className="text-sm font-bold uppercase tracking-[0.18em] text-accent">Sua rotina de inglês, com acompanhamento</p>
-            <h2 className="mt-3 text-3xl font-bold text-primary md:text-4xl">Uma turma pequena para você participar de verdade.</h2>
+            <h2 className="mt-3 text-3xl font-bold text-primary md:text-4xl">Aulas que cabem na sua rotina, com acompanhamento de verdade.</h2>
           </div>
           <GroupPlanCard settings={settings} />
           <p className="mt-5 text-center text-sm text-muted-foreground">Ficou com dúvida? Chame a Teacher no WhatsApp antes de decidir.</p>
@@ -161,9 +161,9 @@ function Index() {
         <div className="rounded-3xl border-2 border-primary bg-lilac-soft p-8 text-center shadow-pop md:p-12">
           <Play className="mx-auto h-9 w-9 text-accent" />
           <h2 className="mt-4 text-3xl font-bold text-primary md:text-4xl">Pronto(a) para fazer o inglês caber na sua vida?</h2>
-          <p className="mx-auto mt-4 max-w-2xl text-muted-foreground">Converse com a Teacher, conte seu objetivo e descubra como a turma pode ajudar você.</p>
+          <p className="mx-auto mt-4 max-w-2xl text-muted-foreground">Converse com a Teacher, conte seu objetivo e descubra como as aulas podem ajudar você.</p>
           <div className="mt-7 flex flex-wrap justify-center gap-3">
-            <WhatsButton href={settings.whatsapp_url}>Quero conversar sobre a turma</WhatsButton>
+            <WhatsButton href={settings.whatsapp_url}>Quero conversar sobre as aulas</WhatsButton>
             <InstaButton className="text-primary" />
           </div>
         </div>

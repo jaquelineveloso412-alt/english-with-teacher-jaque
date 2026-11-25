@@ -37,8 +37,8 @@ function Ebooks() {
       )}
       <div className="mt-16 rounded-3xl bg-primary p-8 text-center text-primary-foreground md:p-12">
         <h2 className="text-3xl font-bold">Quer praticar com acompanhamento?</h2>
-        <p className="mx-auto mt-3 max-w-xl opacity-85">Entre para a turma com até 6 alunos e tenha aulas ao vivo, gravadas, material e plataforma de apoio.</p>
-        <div className="mt-6"><WhatsButton href={data.settings.whatsapp_url}>Quero conhecer a turma</WhatsButton></div>
+        <p className="mx-auto mt-3 max-w-xl opacity-85">Comece com as aulas e tenha encontros ao vivo, aulas gravadas, material e plataforma de apoio.</p>
+        <div className="mt-6"><WhatsButton href={data.settings.whatsapp_url}>Quero conhecer as aulas</WhatsButton></div>
       </div>
     </div>
   );

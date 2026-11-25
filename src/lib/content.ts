@@ -25,7 +25,7 @@ export const fallbackContent: PublicContent = {
     hero_title: "Destrave seu inglês",
     hero_highlight: "com confiança.",
     hero_description:
-      "Aprenda em uma turma pequena, pratique toda semana e tenha suporte para usar o inglês em viagens, no trabalho e no dia a dia.",
+      "Aprenda com aulas ao vivo toda semana, pratique sempre e tenha suporte para usar o inglês em viagens, no trabalho e no dia a dia.",
     home_photo_url: homePhoto.url,
     about_photo_url: aboutPhoto.url,
     about_heading: "Hi, I'm Jaque!",
@@ -37,14 +37,13 @@ export const fallbackContent: PublicContent = {
       "Te ajudar a transformar o inglês em uma ferramenta para a sua vida — viajar, trabalhar, estudar ou se comunicar com mais confiança.",
     methodology_text:
       "As aulas priorizam prática de conversação, trabalhando speaking, listening, reading e writing, com foco especial em pronúncia e fala natural.",
-    plan_name: "Aulas em grupo",
-    plan_tag: "Turmas com até 6 alunos",
+    plan_name: "Aulas de inglês",
+    plan_tag: "Aulas ao vivo toda semana",
     plan_price: "R$ 280,00",
     plan_features: [
       "Aulas ao vivo toda semana",
       "Aulas gravadas",
       "Plataforma de apoio",
-      "Turmas reduzidas de até 6 alunos",
       "Material incluso",
       "Situações reais: viagens, trabalho e dia a dia",
     ],

@@ -64,7 +64,7 @@ function Sobre() {
         <h2 className="mt-3 text-3xl font-bold">Minha metodologia</h2>
         <p className="mt-3 max-w-2xl opacity-85">{settings.methodology_text}</p>
         <ul className="mt-6 grid gap-2 sm:grid-cols-2">
-          {["Aulas em turmas reduzidas", "Planejamento de acordo com seu objetivo", "Material incluso", "Plataforma de apoio", "Prática de conversação real", "Inglês para viagens, trabalho e dia a dia"].map((feature) => (
+          {["Aulas ao vivo toda semana", "Planejamento de acordo com seu objetivo", "Material incluso", "Plataforma de apoio", "Prática de conversação real", "Inglês para viagens, trabalho e dia a dia"].map((feature) => (
             <li key={feature} className="flex gap-2"><Check className="h-5 w-5 shrink-0 text-lilac" />{feature}</li>
           ))}
         </ul>

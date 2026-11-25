@@ -114,7 +114,7 @@ function Admin() {
       return;
     }
     await refresh();
-    toast.success("Textos, fotos e turma atualizados no site.");
+    toast.success("Textos, fotos e aulas atualizados no site.");
   }
 
   async function saveTestimonial(item: Testimonial) {
@@ -204,7 +204,7 @@ function Admin() {
 
   const tabs: { id: Tab; label: string }[] = [
     { id: "inicio", label: "Página inicial" },
-    { id: "sobre", label: "Sobre e turma" },
+    { id: "sobre", label: "Sobre e aulas" },
     { id: "depoimentos", label: "Depoimentos" },
     { id: "ebooks", label: "E-books" },
   ];
@@ -259,8 +259,8 @@ function Admin() {
               <Field label="Segundo parágrafo"><textarea rows={4} className={inputClass} value={settings.about_paragraph_two} onChange={(e) => setSettings({ ...settings, about_paragraph_two: e.target.value })} /></Field>
               <Field label="Missão"><textarea rows={3} className={inputClass} value={settings.mission_text} onChange={(e) => setSettings({ ...settings, mission_text: e.target.value })} /></Field>
               <Field label="Metodologia"><textarea rows={3} className={inputClass} value={settings.methodology_text} onChange={(e) => setSettings({ ...settings, methodology_text: e.target.value })} /></Field>
-              <Field label="Nome da turma"><input className={inputClass} value={settings.plan_name} onChange={(e) => setSettings({ ...settings, plan_name: e.target.value })} /></Field>
-              <Field label="Destaque da turma"><input className={inputClass} value={settings.plan_tag} onChange={(e) => setSettings({ ...settings, plan_tag: e.target.value })} /></Field>
+              <Field label="Nome do plano"><input className={inputClass} value={settings.plan_name} onChange={(e) => setSettings({ ...settings, plan_name: e.target.value })} /></Field>
+              <Field label="Destaque do plano"><input className={inputClass} value={settings.plan_tag} onChange={(e) => setSettings({ ...settings, plan_tag: e.target.value })} /></Field>
               <Field label="Preço mensal"><input className={inputClass} value={settings.plan_price} onChange={(e) => setSettings({ ...settings, plan_price: e.target.value })} /></Field>
               <Field label="O que está incluso" help="Escreva um tópico por linha."><textarea rows={8} className={inputClass} value={settings.plan_features.join("\n")} onChange={(e) => setSettings({ ...settings, plan_features: e.target.value.split("\n") })} /></Field>
             </div>

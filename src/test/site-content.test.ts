@@ -5,19 +5,21 @@ import { getEbookAction } from "@/lib/ebook-action";
 const whatsapp = "https://wa.me/message/CO34TPM7J6K6H1";
 
 describe("Oferta atual da Teacher", () => {
-  it("oferece somente a turma em grupo", () => {
+  it("oferece um único plano de aulas", () => {
     expect(plans).toHaveLength(1);
   });
 
-  it("mantém a mensalidade da turma em R$ 280,00", () => {
+  it("mantém a mensalidade em R$ 280,00", () => {
     expect(plans[0]?.price).toBe("R$ 280,00");
   });
 
-  it("limita cada turma a 6 alunos", () => {
-    expect(plans[0]?.maxStudents).toBe(6);
+  it("não apresenta a oferta como aula em grupo", () => {
+    const text = JSON.stringify(plans).toLowerCase();
+    expect(text).not.toContain("grupo");
+    expect(text).not.toContain("turma");
   });
 
-  it("inclui uma aula ao vivo semanal e os suportes da turma", () => {
+  it("inclui uma aula ao vivo semanal e os suportes das aulas", () => {
     expect(plans[0]?.weeklyLiveClasses).toBe(1);
     expect(plans[0]?.hasRecordedClasses).toBe(true);
     expect(plans[0]?.hasSupportPlatform).toBe(true);

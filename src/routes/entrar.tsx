@@ -78,7 +78,7 @@ function Login() {
       <div className="rounded-3xl border bg-card p-7 shadow-pop">
         <LockKeyhole className="h-9 w-9 text-accent" />
         <h1 className="mt-4 text-3xl font-extrabold">Área da Teacher</h1>
-        <p className="mt-2 text-sm text-muted-foreground">Entre para editar textos, fotos, depoimentos, turma e e-books.</p>
+        <p className="mt-2 text-sm text-muted-foreground">Entre para editar textos, fotos, depoimentos, aulas e e-books.</p>
         <form onSubmit={signIn} className="mt-7 space-y-4">
           <label className="block text-sm font-semibold">
             E-mail

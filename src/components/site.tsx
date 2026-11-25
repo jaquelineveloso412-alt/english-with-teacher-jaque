@@ -42,7 +42,7 @@ export function InstaButton({ className = "" }: { className?: string }) {
 const nav = [
   { to: "/", label: "Início" },
   { to: "/sobre", label: "Sobre mim" },
-  { to: "/planos", label: "Turma" },
+  { to: "/planos", label: "Aulas" },
   { to: "/ebooks", label: "E-books" },
 ] as const;
 
@@ -56,7 +56,7 @@ export function Header() {
         rel="noopener noreferrer"
         className="flex items-center justify-center gap-2 bg-primary px-4 py-2 text-center text-xs font-semibold text-primary-foreground sm:text-sm"
       >
-        Turmas com até 6 alunos · material incluso <span className="underline">Quero minha vaga</span>
+        Aulas por até {settings.plan_price}/mês · material incluso <span className="underline">Quero minha vaga</span>
       </a>
       <div className="mx-auto flex max-w-6xl items-center justify-between gap-4 px-5 py-3">
         <Link to="/" className="font-display text-xl font-extrabold text-primary">
@@ -91,7 +91,7 @@ export function Header() {
             rel="noopener noreferrer"
             className="rounded-full bg-primary px-4 py-2 text-sm font-semibold text-primary-foreground"
           >
-            Entrar na turma
+            Quero as aulas
           </a>
         </div>
       </div>
@@ -112,9 +112,9 @@ export function Footer() {
     <footer className="bg-hero text-primary-foreground">
       <div className="mx-auto flex max-w-6xl flex-col items-center gap-6 px-5 py-14 text-center">
         <p className="text-sm font-semibold uppercase tracking-[0.2em] text-lilac">Seu inglês pode começar hoje</p>
-        <h2 className="max-w-2xl text-3xl font-bold md:text-4xl">Escolha seu próximo passo: entre na turma ou comece com um e-book.</h2>
+        <h2 className="max-w-2xl text-3xl font-bold md:text-4xl">Escolha seu próximo passo: comece com as aulas ou com um e-book.</h2>
         <div className="flex flex-wrap justify-center gap-3">
-          <WhatsButton href={settings.whatsapp_url}>Quero entrar na turma</WhatsButton>
+          <WhatsButton href={settings.whatsapp_url}>Quero começar as aulas</WhatsButton>
           <Link to="/ebooks" className="inline-flex items-center rounded-full border-2 border-current px-6 py-3 font-semibold">
             Ver e-books
           </Link>
@@ -140,7 +140,7 @@ export function FloatingWhats() {
       href={settings.whatsapp_url}
       target="_blank"
       rel="noopener noreferrer"
-      aria-label="Quero entrar na turma pelo WhatsApp"
+      aria-label="Quero falar com a Teacher pelo WhatsApp"
       className="fixed bottom-5 right-5 z-50 rounded-full bg-whatsapp p-4 text-primary-foreground shadow-lg transition hover:scale-110"
     >
       <MessageCircle className="h-6 w-6" />

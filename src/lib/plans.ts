@@ -1,8 +1,7 @@
 export const plans = [
   {
-    name: "Aula em Grupo",
+    name: "Aulas de inglês",
     price: "R$ 280,00",
-    maxStudents: 6,
     weeklyLiveClasses: 1,
     hasRecordedClasses: true,
     hasSupportPlatform: true,
