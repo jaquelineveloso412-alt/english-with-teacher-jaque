@@ -19,7 +19,7 @@ export const Route = createFileRoute("/")({
     return {
       meta: [
         { title: "Teacher Jaque Veloso — Aulas de inglês para a vida real" },
-        { name: "description", content: "Aulas ao vivo toda semana, aulas gravadas, plataforma de apoio e material incluso por até R$ 280,00/mês." },
+        { name: "description", content: "Aulas ao vivo toda semana, aulas gravadas, plataforma de apoio e material incluso por até R$ 287,00/mês." },
         { property: "og:title", content: "Destrave seu inglês com a Teacher Jaque" },
         { property: "og:description", content: "Prática toda semana e suporte para você falar com confiança." },
         { property: "og:type", content: "website" },
@@ -65,7 +65,7 @@ const capabilities = [
 ];
 
 const forWho = [
-  "Quem já estudou inglês, mas trava na hora de falar.",
+  "Quem realmente necessita do inglês.",
   "Quem vai viajar e quer se virar sozinho(a) com tranquilidade.",
   "Quem precisa do inglês no trabalho ou para crescer na carreira.",
   "Quem quer aulas práticas, com situações reais do dia a dia.",
@@ -81,7 +81,7 @@ const faq = [
   { q: "Preciso já saber inglês para começar?", a: "Não. As aulas se adaptam ao seu nível, desde os primeiros passos até a fluência." },
   { q: "Como funcionam as aulas?", a: "Você tem aulas ao vivo toda semana, aulas gravadas para revisar quando quiser e uma plataforma de apoio com material incluso." },
   { q: "E se eu perder uma aula ao vivo?", a: "Você conta com as aulas gravadas e o material da plataforma para não ficar para trás." },
-  { q: "Quanto custa?", a: "As aulas saem por até R$ 280,00 por mês. Chame no WhatsApp para saber a melhor opção para você." },
+  { q: "Quanto custa?", a: "As aulas saem por até R$ 287,00 por mês. Chame no WhatsApp para saber a melhor opção para você." },
   { q: "Como faço para começar?", a: "É só clicar em qualquer botão da página e falar comigo no WhatsApp. Eu te explico tudo." },
 ];
 

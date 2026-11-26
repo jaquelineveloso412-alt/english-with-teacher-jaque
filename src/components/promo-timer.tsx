@@ -2,16 +2,18 @@ import { useEffect, useState } from "react";
 
 export const CYCLE = 15 * 60; // 15min, then restarts
 
-export function remaining() {
-  const s = Math.floor(Date.now() / 1000);
+// Each visitor starts at 15:00 when they open the page, then it restarts.
+export function remaining(start = Date.now()) {
+  const s = Math.floor((Date.now() - start) / 1000);
   return CYCLE - 1 - (s % CYCLE);
 }
 
 export function PromoTimer() {
   const [left, setLeft] = useState<number | null>(null);
   useEffect(() => {
-    setLeft(remaining());
-    const t = window.setInterval(() => setLeft(remaining()), 1000);
+    const start = Date.now();
+    setLeft(remaining(start));
+    const t = window.setInterval(() => setLeft(remaining(start)), 1000);
     return () => window.clearInterval(t);
   }, []);
   const v = left ?? CYCLE - 1;

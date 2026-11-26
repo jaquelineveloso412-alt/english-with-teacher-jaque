@@ -41,9 +41,6 @@ export function InstaButton({ className = "" }: { className?: string }) {
 
 const nav = [
   { to: "/", label: "Início" },
-  { to: "/sobre", label: "Sobre mim" },
-  { to: "/planos", label: "Aulas" },
-  { to: "/ebooks", label: "E-books" },
 ] as const;
 
 export function Header() {
@@ -62,7 +59,7 @@ export function Header() {
         <Link to="/" className="font-display text-xl font-extrabold text-primary">
           Jaque<span className="text-accent">.</span>Veloso
         </Link>
-        <nav className="hidden gap-6 text-sm font-medium md:flex" aria-label="Navegação principal">
+        <nav className="hidden" aria-label="Navegação principal">
           {nav.map((item) => (
             <Link
               key={item.to}
@@ -95,7 +92,7 @@ export function Header() {
           </a>
         </div>
       </div>
-      <nav className="flex justify-around border-t py-2 text-sm md:hidden" aria-label="Navegação móvel">
+      <nav className="hidden" aria-label="Navegação móvel">
         {nav.map((item) => (
           <Link key={item.to} to={item.to} activeOptions={{ exact: true }} className="text-muted-foreground" activeProps={{ className: "text-primary font-bold" }}>
             {item.label}

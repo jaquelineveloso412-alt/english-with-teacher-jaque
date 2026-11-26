@@ -2,7 +2,7 @@ import { queryOptions } from "@tanstack/react-query";
 import type { Database } from "@/integrations/supabase/types";
 import { getPublicContent, getAdminContent } from "@/lib/content.functions";
 import homePhoto from "@/assets/jaque_inicio.jpg.asset.json";
-import aboutPhoto from "@/assets/jaque_sobre.jpg.asset.json";
+import aboutPhoto from "@/assets/jaque_londres.jpg.asset.json";
 import dep1 from "@/assets/depoimento_bruna.jpg.asset.json";
 import dep2 from "@/assets/depoimento_bru.png.asset.json";
 import dep3 from "@/assets/depoimento_marina.png.asset.json";
@@ -32,14 +32,14 @@ export const fallbackContent: PublicContent = {
     about_paragraph_one:
       "Sou professora de inglês há mais de 5 anos, formada em Letras pela UEMG, com proficiência comprovada pelo TOEFL e pós-graduanda em Ensino de Língua Inglesa pela UFMG.",
     about_paragraph_two:
-      "Minha paixão está na comunicação — por isso minhas aulas são voltadas para você ganhar segurança para falar, desde os primeiros níveis. Também sou apaixonada por viagens e fui intercambista em Cambridge, no Reino Unido.",
+      "Minha paixão está na comunicação — por isso minhas aulas são voltadas para você ganhar segurança para falar, desde os primeiros níveis. Em 2024 resolvi me tornar intercambista e viajar pelo mundo, sendo um dos principais locais de intercâmbio o Reino Unido e os Estados Unidos.",
     mission_text:
       "Te ajudar a transformar o inglês em uma ferramenta para a sua vida — viajar, trabalhar, estudar ou se comunicar com mais confiança.",
     methodology_text:
       "As aulas priorizam prática de conversação, trabalhando speaking, listening, reading e writing, com foco especial em pronúncia e fala natural.",
     plan_name: "Aulas de inglês",
     plan_tag: "Aulas ao vivo toda semana",
-    plan_price: "R$ 280,00",
+    plan_price: "R$ 287,00",
     plan_features: [
       "Aulas ao vivo toda semana",
       "Aulas gravadas",

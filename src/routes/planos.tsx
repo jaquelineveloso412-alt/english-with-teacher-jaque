@@ -8,8 +8,8 @@ export const Route = createFileRoute("/planos")({
   head: () => ({
     meta: [
       { title: "Aulas de inglês online — Teacher Jaque Veloso" },
-      { name: "description", content: "Aulas por até R$ 280,00/mês: ao vivo toda semana, gravadas, plataforma de apoio e material incluso." },
-      { property: "og:title", content: "Aulas de inglês por até R$ 280,00/mês" },
+      { name: "description", content: "Aulas por até R$ 287,00/mês: ao vivo toda semana, gravadas, plataforma de apoio e material incluso." },
+      { property: "og:title", content: "Aulas de inglês por até R$ 287,00/mês" },
       { property: "og:description", content: "Pratique toda semana e tenha suporte para destravar seu inglês." },
     ],
   }),
@@ -22,7 +22,7 @@ function Planos() {
     <div className="mx-auto max-w-5xl px-5 py-16">
       <div className="mx-auto max-w-2xl text-center">
         <p className="text-sm font-bold uppercase tracking-[0.18em] text-accent">Comece quando quiser</p>
-        <h1 className="mt-3 text-4xl font-extrabold md:text-5xl">Aulas por até R$ 280,00 por mês.</h1>
+        <h1 className="mt-3 text-4xl font-extrabold md:text-5xl">Aulas por até R$ 287,00 por mês.</h1>
         <p className="mt-4 text-muted-foreground">Um único plano, com tudo que você precisa para criar uma rotina de inglês e evoluir com confiança.</p>
       </div>
       <div className="mt-12"><GroupPlanCard settings={data.settings} centered /></div>

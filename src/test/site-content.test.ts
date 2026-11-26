@@ -9,8 +9,8 @@ describe("Oferta atual da Teacher", () => {
     expect(plans).toHaveLength(1);
   });
 
-  it("mantém a mensalidade em R$ 280,00", () => {
-    expect(plans[0]?.price).toBe("R$ 280,00");
+  it("mantém a mensalidade em R$ 287,00", () => {
+    expect(plans[0]?.price).toBe("R$ 287,00");
   });
 
   it("não apresenta a oferta como aula em grupo", () => {
