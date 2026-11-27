@@ -4,6 +4,7 @@ import { Instagram, MessageCircle, Settings } from "lucide-react";
 import type { ReactNode } from "react";
 import qr from "@/assets/whatsapp_qrcode.jpg.asset.json";
 import { contentQueryOptions, fallbackContent } from "@/lib/content";
+import { PromotionPrice } from "@/components/promotion";
 
 function useLinks() {
   const { data = fallbackContent } = useQuery(contentQueryOptions);
@@ -51,9 +52,9 @@ export function Header() {
         href={settings.whatsapp_url}
         target="_blank"
         rel="noopener noreferrer"
-        className="flex items-center justify-center gap-2 bg-primary px-4 py-2 text-center text-xs font-semibold text-primary-foreground sm:text-sm"
+        className="flex flex-wrap items-center justify-center gap-2 bg-primary px-4 py-2 text-center text-xs font-normal text-primary-foreground sm:text-sm"
       >
-        Aulas por até {settings.plan_price}/mês · material incluso <span className="underline">Quero minha vaga</span>
+        <PromotionPrice price={settings.plan_price} /> · material incluso <span className="underline">Quero minha vaga</span>
       </a>
       <div className="mx-auto flex max-w-6xl items-center justify-between gap-4 px-5 py-3">
         <Link to="/" className="font-display text-xl font-extrabold text-primary">

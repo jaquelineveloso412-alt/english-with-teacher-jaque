@@ -17,6 +17,8 @@ export const Route = createFileRoute("/sobre")({
         { name: "description", content: "Professora de inglês há mais de 5 anos, formada em Letras pela UEMG, TOEFL e pós-graduanda pela UFMG." },
         { property: "og:title", content: "Conheça a Teacher Jaque Veloso" },
         { property: "og:description", content: "Experiência, metodologia e uma paixão: ajudar você a se comunicar com confiança." },
+        { property: "og:type", content: "website" },
+        { name: "twitter:card", content: "summary_large_image" },
         ...socialImage,
       ],
     };

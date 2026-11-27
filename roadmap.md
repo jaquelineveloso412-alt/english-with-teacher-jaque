@@ -1,5 +1,7 @@
 # Tarefas
 
+- [x] Atualizar oferta para R$ 337,00 por R$ 197,00 e mostrar dia/data atuais em letras menores
+
 - [ ] Publicar nova página inicial orientada para matrículas e vendas
 - [ ] Usar a primeira foto nova no início e a segunda em Sobre mim
 - [ ] Substituir o carrossel sobreposto por uma linha apenas com depoimentos

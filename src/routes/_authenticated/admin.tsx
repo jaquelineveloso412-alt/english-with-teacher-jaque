@@ -14,6 +14,8 @@ export const Route = createFileRoute("/_authenticated/admin")({
       { name: "robots", content: "noindex, nofollow" },
       { property: "og:title", content: "Editar site" },
       { property: "og:description", content: "Área restrita da Teacher Jaque." },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
     ],
   }),
   component: Admin,

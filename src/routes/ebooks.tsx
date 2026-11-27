@@ -13,6 +13,8 @@ export const Route = createFileRoute("/ebooks")({
       { name: "description", content: "Materiais digitais gratuitos e pagos para você estudar inglês no seu ritmo." },
       { property: "og:title", content: "E-books da Teacher Jaque Veloso" },
       { property: "og:description", content: "Conteúdo prático para levar seu inglês com você." },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
     ],
   }),
   component: Ebooks,

@@ -5,6 +5,7 @@ import { DepoimentoCarousel } from "@/components/carousel-fotos";
 import { EbookCard } from "@/components/products";
 import { contentQueryOptions } from "@/lib/content";
 import { PromoTimer } from "@/components/promo-timer";
+import { PromotionPrice, TodayPromotion } from "@/components/promotion";
 
 export const Route = createFileRoute("/")({
   loader: ({ context }) => context.queryClient.ensureQueryData(contentQueryOptions),
@@ -19,7 +20,7 @@ export const Route = createFileRoute("/")({
     return {
       meta: [
         { title: "Teacher Jaque Veloso — Aulas de inglês para a vida real" },
-        { name: "description", content: "Aulas ao vivo toda semana, aulas gravadas, plataforma de apoio e material incluso por até R$ 287,00/mês." },
+        { name: "description", content: `Aulas ao vivo toda semana, aulas gravadas, plataforma de apoio e material incluso por ${loaderData?.settings.plan_price ?? "R$ 197,00"} no mês.` },
         { property: "og:title", content: "Destrave seu inglês com a Teacher Jaque" },
         { property: "og:description", content: "Prática toda semana e suporte para você falar com confiança." },
         { property: "og:type", content: "website" },
@@ -81,7 +82,6 @@ const faq = [
   { q: "Preciso já saber inglês para começar?", a: "Não. As aulas se adaptam ao seu nível, desde os primeiros passos até a fluência." },
   { q: "Como funcionam as aulas?", a: "Você tem aulas ao vivo toda semana, aulas gravadas para revisar quando quiser e uma plataforma de apoio com material incluso." },
   { q: "E se eu perder uma aula ao vivo?", a: "Você conta com as aulas gravadas e o material da plataforma para não ficar para trás." },
-  { q: "Quanto custa?", a: "As aulas saem por até R$ 287,00 por mês. Chame no WhatsApp para saber a melhor opção para você." },
   { q: "Como faço para começar?", a: "É só clicar em qualquer botão da página e falar comigo no WhatsApp. Eu te explico tudo." },
 ];
 
@@ -102,8 +102,8 @@ function Index() {
             <div className="flex items-center gap-3">
               <span className="hidden rounded-full bg-lilac-soft px-3 py-1.5 text-xs font-semibold text-primary sm:inline">Oferta especial</span>
               <div className="text-sm">
-                <p className="font-semibold uppercase">Somente hoje</p>
-                <p className="text-muted-foreground">Aulas por até <strong className="text-primary">{settings.plan_price}</strong>/mês</p>
+                <TodayPromotion />
+                <p className="mt-1 text-primary"><PromotionPrice price={settings.plan_price} /></p>
               </div>
             </div>
             <div className="flex items-center gap-4">
@@ -197,9 +197,8 @@ function Index() {
           <div className="rounded-3xl border border-border bg-card p-8 text-center shadow-2xl md:p-10">
             <p className="font-serif text-3xl text-primary">{settings.plan_name}</p>
             <p className="mt-2 text-sm uppercase tracking-[0.2em] text-muted-foreground">{settings.plan_tag}</p>
-            <p className="mt-8 text-muted-foreground">por apenas até</p>
-            <p className="font-serif text-6xl font-semibold text-primary">{settings.plan_price}</p>
-            <p className="text-muted-foreground">por mês</p>
+            <div className="mt-8 flex justify-center"><TodayPromotion /></div>
+            <p className="mt-3 font-serif text-3xl text-primary"><PromotionPrice price={settings.plan_price} /></p>
             <div className="mt-6 flex items-center justify-center gap-2 text-sm">
               <span className="text-muted-foreground">Oferta encerra em</span> <PromoTimer />
             </div>
@@ -240,7 +239,7 @@ function Index() {
         <div className="mx-auto max-w-3xl">
           <h2 className="text-center font-serif text-4xl font-normal text-primary">Perguntas frequentes</h2>
           <div className="mt-10 space-y-3">
-            {faq.map(({ q, a }) => (
+            {[...faq, { q: "Quanto custa?", a: `De R$ 337,00 por ${settings.plan_price} no mês. Chame no WhatsApp para saber mais.` }].map(({ q, a }) => (
               <details key={q} className="group rounded-2xl bg-card p-5 shadow-sm">
                 <summary className="cursor-pointer list-none text-lg font-semibold marker:hidden">{q}</summary>
                 <p className="mt-3 text-muted-foreground">{a}</p>

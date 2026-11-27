@@ -1,5 +1,6 @@
 import { Check } from "lucide-react";
 import type { SiteSettings } from "@/lib/content";
+import { PromotionPrice, TodayPromotion } from "@/components/promotion";
 
 export function GroupPlanCard({ settings, centered = false }: { settings: SiteSettings; centered?: boolean }) {
   return (
@@ -8,11 +9,8 @@ export function GroupPlanCard({ settings, centered = false }: { settings: SiteSe
         <div>
           <span className="inline-block rounded-full bg-lilac px-4 py-1 text-xs font-bold text-accent-foreground">{settings.plan_tag}</span>
           <h3 className="mt-4 text-3xl font-bold">{settings.plan_name}</h3>
-          <p className="mt-5">
-            <span className="block text-xs font-bold uppercase tracking-[0.18em] opacity-75">Aulas por até</span>
-            <span className="font-display text-5xl font-extrabold">{settings.plan_price}</span>
-            <span className="opacity-75"> /mês</span>
-          </p>
+          <div className="mt-5"><TodayPromotion /></div>
+          <p className="mt-3 text-xl"><PromotionPrice price={settings.plan_price} /></p>
           <p className="mt-3 text-sm opacity-75">Mensalidade fixa, sem surpresa. Comece quando quiser.</p>
         </div>
         <ul className="grid gap-3 sm:grid-cols-2 md:grid-cols-1 lg:grid-cols-2">

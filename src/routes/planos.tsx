@@ -2,15 +2,18 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { useSuspenseQuery } from "@tanstack/react-query";
 import { GroupPlanCard } from "@/components/offer";
 import { contentQueryOptions } from "@/lib/content";
+import { PromotionPrice } from "@/components/promotion";
 
 export const Route = createFileRoute("/planos")({
   loader: ({ context }) => context.queryClient.ensureQueryData(contentQueryOptions),
-  head: () => ({
+  head: ({ loaderData }) => ({
     meta: [
       { title: "Aulas de inglês online — Teacher Jaque Veloso" },
-      { name: "description", content: "Aulas por até R$ 287,00/mês: ao vivo toda semana, gravadas, plataforma de apoio e material incluso." },
-      { property: "og:title", content: "Aulas de inglês por até R$ 287,00/mês" },
+      { name: "description", content: `Aulas por ${loaderData?.settings.plan_price ?? "R$ 197,00"} no mês: ao vivo toda semana, gravadas, plataforma de apoio e material incluso.` },
+      { property: "og:title", content: "Oferta de aulas de inglês — Teacher Jaque Veloso" },
       { property: "og:description", content: "Pratique toda semana e tenha suporte para destravar seu inglês." },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
     ],
   }),
   component: Planos,
@@ -22,7 +25,7 @@ function Planos() {
     <div className="mx-auto max-w-5xl px-5 py-16">
       <div className="mx-auto max-w-2xl text-center">
         <p className="text-sm font-bold uppercase tracking-[0.18em] text-accent">Comece quando quiser</p>
-        <h1 className="mt-3 text-4xl font-extrabold md:text-5xl">Aulas por até R$ 287,00 por mês.</h1>
+        <h1 className="mt-3 text-4xl font-normal md:text-5xl"><PromotionPrice price={data.settings.plan_price} /></h1>
         <p className="mt-4 text-muted-foreground">Um único plano, com tudo que você precisa para criar uma rotina de inglês e evoluir com confiança.</p>
       </div>
       <div className="mt-12"><GroupPlanCard settings={data.settings} centered /></div>

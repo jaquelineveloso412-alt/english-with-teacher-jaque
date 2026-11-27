@@ -39,7 +39,7 @@ export const fallbackContent: PublicContent = {
       "As aulas priorizam prática de conversação, trabalhando speaking, listening, reading e writing, com foco especial em pronúncia e fala natural.",
     plan_name: "Aulas de inglês",
     plan_tag: "Aulas ao vivo toda semana",
-    plan_price: "R$ 287,00",
+    plan_price: "R$ 197,00",
     plan_features: [
       "Aulas ao vivo toda semana",
       "Aulas gravadas",

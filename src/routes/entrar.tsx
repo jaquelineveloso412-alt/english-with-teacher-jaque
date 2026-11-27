@@ -14,6 +14,8 @@ export const Route = createFileRoute("/entrar")({
       { name: "robots", content: "noindex, nofollow" },
       { property: "og:title", content: "Área da Teacher" },
       { property: "og:description", content: "Acesso restrito para gerenciar o conteúdo do site." },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
     ],
   }),
   component: Login,

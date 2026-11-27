@@ -11,3 +11,4 @@
 
 - Public site content lives in Lovable Cloud tables and is editable only by admin-role users at `/admin`; database RLS is the authorization boundary so content management remains safe outside the UI.
 - Uploaded content uses private storage and public pages receive signed URLs only for published records; this keeps drafts and hidden products inaccessible while allowing owner-managed media.
+- Render promotional prices through the shared promotion component and derive live dates after hydration in the campaign time zone to avoid inconsistent prices and hydration mismatches.
